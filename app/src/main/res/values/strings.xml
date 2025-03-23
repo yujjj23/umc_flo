@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_search">Search\n</string>
+    <string name="title_홈">홈</string>
+    <string name="title_둘러보기">둘러보기\n</string>
+    <string name="title_검색">검색</string>
+    <string name="title_보관함">보관함</string>
+</resources>
