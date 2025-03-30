@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomView">
+        <attr name="ci_radius" format="dimension"/>
+        <attr name="ci_color_selected" format="color"/>
+        <attr name="ci_color" format="color"/>
+        <attr name="ci_animationType" format="enum">
+            <enum name="fade" value="0"/>
+            <enum name="slide" value="1"/>
+            <enum name="scale" value="2"/> <!-- scale 추가 -->
+        </attr>
+    </declare-styleable>
+
+</resources>
