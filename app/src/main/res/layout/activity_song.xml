@@ -41,12 +41,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- 중앙 이미지 (화면 정중앙에 배치) -->
-    <!-- 정중앙 배치 -->
-
-
-    <!-- 중앙 이미지 아래 텍스트 -->
-
     <ImageView
         android:id="@+id/iv_center_image"
         android:layout_width="200dp"
@@ -71,81 +65,76 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- 중앙 이미지 아래 나란히 있는 두 개의 이미지 -->
     <LinearLayout
         android:id="@+id/linear_two_images"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/tv_description">
 
-    <ImageView
-        android:id="@+id/iv_left_image"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/ic_my_like_off" />
+        <ImageView
+            android:id="@+id/iv_left_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_my_like_off" />
 
-    <ImageView
-        android:id="@+id/iv_right_image"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/btn_player_unlike_off" />
-</LinearLayout>
+        <ImageView
+            android:id="@+id/iv_right_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/btn_player_unlike_off" />
+    </LinearLayout>
 
-    <!-- 중앙 이미지 아래 나란히 있는 다섯 개의 이미지 -->
     <LinearLayout
-    android:id="@+id/linear_five_images"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="40dp"
-    app:layout_constraintTop_toBottomOf="@id/linear_two_images"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent">
+        android:id="@+id/linear_five_images"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear_two_images">
 
-<!--<ImageView-->
-<!--android:id="@+id/iv_icon1"-->
-<!--android:layout_width="50dp"-->
-<!--android:layout_height="50dp"-->
-<!--android:src="@drawable/nugu_btn_repeat_inactive" />-->
         <ImageView
             android:id="@+id/iv_icon1"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/state_icon1" />
 
+        <ImageView
+            android:id="@+id/iv_icon2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/btn_miniplayer_previous" />
 
-<ImageView
-android:id="@+id/iv_icon2"
-android:layout_width="50dp"
-android:layout_height="50dp"
-android:layout_marginStart="8dp"
-android:src="@drawable/btn_miniplayer_previous" />
 
-<ImageView
-android:id="@+id/iv_icon3"
-android:layout_width="50dp"
-android:layout_height="50dp"
-android:layout_marginStart="8dp"
-android:src="@drawable/btn_miniplayer_play" />
+        <ImageButton
+            android:id="@+id/btn_play_pause"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_miniplayer_play"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/seekBar" />
 
-<ImageView
-android:id="@+id/iv_icon4"
-android:layout_width="50dp"
-android:layout_height="50dp"
-android:layout_marginStart="8dp"
-android:src="@drawable/btn_miniplayer_next" />
+        <ImageView
+            android:id="@+id/iv_icon4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/btn_miniplayer_next" />
 
-<!--<ImageView-->
-<!--android:id="@+id/iv_icon5"-->
-<!--android:layout_width="50dp"-->
-<!--android:layout_height="50dp"-->
-<!--android:layout_marginStart="8dp"-->
-<!--android:src="@drawable/nugu_btn_random_inactive" />-->
         <ImageView
             android:id="@+id/iv_icon5"
             android:layout_width="50dp"
@@ -154,52 +143,70 @@ android:src="@drawable/btn_miniplayer_next" />
 
     </LinearLayout>
 
-    <!-- 하단 세 개의 아이콘 (왼쪽, 중앙, 오른쪽) -->
-<androidx.constraintlayout.widget.ConstraintLayout
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_marginTop="60dp"
-    app:layout_constraintTop_toBottomOf="@id/linear_five_images"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear_five_images">
 
-    <!-- 왼쪽 정렬 -->
-<ImageView
-android:id="@+id/btn_actionbar_instagram"
-android:layout_width="40dp"
-android:layout_height="40dp"
-android:src="@drawable/btn_actionbar_instagram"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toTopOf="parent"
-app:layout_constraintBottom_toBottomOf="parent"
-android:layout_marginStart="16dp" />
+        <ImageView
+            android:id="@+id/btn_actionbar_instagram"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/btn_actionbar_instagram"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- 중앙 정렬 -->
-<ImageView
-android:id="@+id/btn_player_related"
-android:layout_width="40dp"
-android:layout_height="40dp"
-android:src="@drawable/btn_player_related"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintTop_toTopOf="parent"
-app:layout_constraintBottom_toBottomOf="parent" />
+        <ImageView
+            android:id="@+id/btn_player_related"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/btn_player_related"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- 오른쪽 정렬 -->
-<ImageView
-android:id="@+id/go_list"
-android:layout_width="40dp"
-android:layout_height="40dp"
-android:src="@drawable/btn_miniplayer_go_list"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintTop_toTopOf="parent"
-app:layout_constraintBottom_toBottomOf="parent"
-android:layout_marginEnd="16dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/go_list"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/btn_miniplayer_go_list"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:progressTint="@color/purple_500"
+        android:thumbTint="@color/purple_500"
+        app:layout_constraintTop_toBottomOf="@id/iv_center_image" />
 
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="00:00"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/seekBar" />
 
-
-
+</androidx.constraintlayout.widget.ConstraintLayout>
