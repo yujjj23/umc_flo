@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 클릭 시 보라색 -->
+    <item android:color="@color/purple_500" android:state_pressed="true" />
+    <!-- 기본 색상은 검정 -->
+    <item android:color="@android:color/black" />
+</selector>

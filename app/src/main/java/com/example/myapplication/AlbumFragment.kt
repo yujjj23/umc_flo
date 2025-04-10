@@ -18,62 +18,6 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 
-//class AlbumFragment : Fragment() {
-//
-//    private lateinit var tabLayout: TabLayout
-//    private lateinit var viewPager: ViewPager2
-//    private lateinit var btnBack: Button // 뒤로가기 버튼
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        val view = inflater.inflate(R.layout.fragment_album, container, false)
-//
-//        // UI 요소들 초기화
-//        tabLayout = view.findViewById(R.id.tabLayout)
-//        viewPager = view.findViewById(R.id.viewPager)
-//        btnBack = view.findViewById(R.id.btn_back)
-//
-//        // 뒤로가기 버튼 클릭 처리
-//        btnBack.setOnClickListener {
-//            requireActivity().onBackPressed() // 뒤로가기
-//        }
-//
-//        // ViewPager 어댑터 설정
-//        val adapter = AlbumPagerAdapter(this)
-//        viewPager.adapter = adapter
-//
-//        // TabLayout과 ViewPager 연동
-//        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-//            when (position) {
-//                0 -> tab.text = "수록곡"
-//                1 -> tab.text = "상세정보"
-//                2 -> tab.text = "동영상"
-//            }
-//        }.attach()
-//
-//        return view
-//    }
-//
-//    // ViewPager 어댑터
-//    inner class AlbumPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
-//        override fun getItemCount(): Int = 3 // 탭 개수
-//
-//        override fun createFragment(position: Int): Fragment {
-//            return when (position) {
-//                0 -> TrackFragment()  // 수록곡 프래그먼트
-//                1 -> DetailFragment()
-//                2 -> VideoFragment()  // 동영상 프래그먼트
-//                else -> throw IllegalStateException("Invalid position")
-//            }
-//        }
-//    }
-//}
-
-
-
-
 class AlbumFragment : Fragment() {
 
     private lateinit var tabLayout: TabLayout
