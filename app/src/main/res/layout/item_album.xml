@@ -7,15 +7,23 @@
 
     <ImageView
         android:id="@+id/iv_album_image"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/default_image" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_album_exp2" />
 
     <TextView
         android:id="@+id/tv_album_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Album Title"
+        android:text="LILAC"
         android:textSize="18sp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/tv_singer_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="아이유"
+        android:textSize="14sp"
         android:layout_marginTop="8dp" />
 </LinearLayout>

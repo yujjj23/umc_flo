@@ -21,6 +21,12 @@ import com.example.myapplication.PanelAdapter
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentHomeBinding
 import me.relex.circleindicator.CircleIndicator3
+import com.example.myapplication.MusicPlayerManager
+import com.example.myapplication.MainActivity
+import android.widget.TextView
+import android.widget.ImageView
+import com.example.myapplication.AlbumData
+
 
 class HomeFragment : Fragment() {
 
@@ -51,6 +57,37 @@ class HomeFragment : Fragment() {
         // Panel ViewPager 설정
         val panelViewPager = view.findViewById<ViewPager2>(R.id.panelViewPager)
         val panelIndicator = view.findViewById<CircleIndicator3>(R.id.panelIndicator)
+
+        val btnPlayAlbum1 = view.findViewById<AppCompatImageButton>(R.id.btn_play_album1)
+        val btnPlayAlbum2 = view.findViewById<AppCompatImageButton>(R.id.btn_play_album2)
+
+
+//        btnPlayAlbum1.setOnClickListener {
+//            playSongFromAlbum("Next Level", "aespa", R.drawable.img_album_exp3)
+//        }
+//
+//        btnPlayAlbum2.setOnClickListener {
+//            playSongFromAlbum("작은것들을 위한 시", "BTS", R.drawable.img_album_exp4)
+//        }
+// 버튼 클릭 시 곡을 재생하도록 수정
+        btnPlayAlbum1.setOnClickListener {
+            playSongFromAlbum(
+                AlbumData.aespaAlbum[0], // "aenergy" 곡
+                "aespa", // 아티스트
+                R.drawable.img_album_exp3, // 앨범 이미지
+                R.raw.bluedream_cheel // 음악 파일 (실제 파일 이름으로 변경해야 함)
+            )
+        }
+
+        btnPlayAlbum2.setOnClickListener {
+            playSongFromAlbum(
+                AlbumData.btsAlbum[0], // "Intro : Persona" 곡
+                "BTS", // 아티스트
+                R.drawable.img_album_exp4, // 앨범 이미지
+                R.raw.bluedream_cheel// 음악 파일 (실제 파일 이름으로 변경해야 함)
+            )
+        }
+
 
 
         // PanelAdapter 설정
@@ -97,6 +134,22 @@ class HomeFragment : Fragment() {
 
         return view
     }
+
+
+    private fun playSongFromAlbum(title: String, artist: String, albumResId: Int, resId: Int) {
+        val context = requireContext()
+        MusicPlayerManager.release()
+        MusicPlayerManager.mediaPlayer = android.media.MediaPlayer.create(context, resId) // 이 부분 변경됨
+        MusicPlayerManager.play()
+
+        // MiniPlayer UI 업데이트
+        val activity = activity as? MainActivity ?: return
+        activity.findViewById<TextView>(R.id.tv_song_title).text = title
+        activity.findViewById<TextView>(R.id.tv_artist_name).text = artist
+        activity.findViewById<ImageView>(R.id.mini_btn_play).setImageResource(R.drawable.btn_miniplay_pause)
+        activity.findViewById<View>(R.id.mini_player).visibility = View.VISIBLE
+    }
+
 
     private fun navigateToAlbum(button: AppCompatImageButton) {
         val imageResId = getImageResourceId(button)

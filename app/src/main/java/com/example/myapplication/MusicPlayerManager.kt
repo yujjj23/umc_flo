@@ -17,6 +17,15 @@ object MusicPlayerManager {
             mediaPlayer = MediaPlayer.create(context, R.raw.bluedream_cheel)
         }
     }
+    fun playNewSong(context: Context, resId: Int) {
+        release() // 기존 플레이어 해제
+        mediaPlayer = MediaPlayer.create(context, resId)
+        mediaPlayer?.start()
+        isPlaying = true
+        notifyStateChange()
+        startProgressUpdates()
+    }
+
 
     fun play() {
         mediaPlayer?.start()
