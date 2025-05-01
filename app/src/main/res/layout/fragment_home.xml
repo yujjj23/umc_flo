@@ -96,6 +96,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
+                <!-- 앨범 이미지 -->
                 <ImageButton
                     android:id="@+id/btn_go_to_album"
                     android:layout_width="match_parent"
@@ -104,6 +105,18 @@
                     android:scaleType="centerCrop"
                     android:background="@null" />
 
+                <!-- 재생 버튼 -->
+                <ImageButton
+                    android:id="@+id/btn_play_album1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="-40dp"
+                    android:layout_marginStart="70dp"
+                    android:background="@drawable/btn_panel_play_large"
+                    android:contentDescription="재생" />
+
+                <!-- 앨범 제목과 가수 이름 -->
                 <TextView
                     android:id="@+id/text_title1"
                     android:layout_width="wrap_content"
@@ -112,7 +125,7 @@
                     android:textColor="#000000"
                     android:textSize="16sp"
                     android:layout_marginTop="4dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/text_artist1"
@@ -132,6 +145,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
+                <!-- 앨범 이미지 -->
                 <ImageButton
                     android:id="@+id/btn_go_to_album2"
                     android:layout_width="match_parent"
@@ -140,6 +154,18 @@
                     android:scaleType="centerCrop"
                     android:background="@null" />
 
+                <!-- 재생 버튼 -->
+                <ImageButton
+                    android:id="@+id/btn_play_album2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="-40dp"
+                    android:layout_marginStart="70dp"
+                    android:background="@drawable/btn_panel_play_large"
+                    android:contentDescription="재생" />
+
+                <!-- 앨범 제목과 가수 이름 -->
                 <TextView
                     android:id="@+id/text_title2"
                     android:layout_width="wrap_content"
@@ -148,7 +174,7 @@
                     android:textColor="#000000"
                     android:textSize="16sp"
                     android:layout_marginTop="4dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/text_artist2"
@@ -159,6 +185,7 @@
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
+
 
         <!-- 하단 배너 ViewPager -->
         <androidx.viewpager2.widget.ViewPager2
