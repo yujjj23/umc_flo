@@ -2,15 +2,19 @@ package com.example.myapplication
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ItemSavedSongBinding
-import com.example.myapplication.model.Song
+import com.example.myapplication.model.SongItem
+
+
 
 class SavedSongsAdapter(
-    private val onDeleteClick: (Song) -> Unit  // 🔸 삭제 콜백 추가
-) : ListAdapter<Song, SavedSongsAdapter.SavedSongViewHolder>(SavedSongDiffCallback()) {
+    private val onDeleteClick: (SongItem) -> Unit  // 🔸 삭제 콜백 추가
+) : ListAdapter<SongItem, SavedSongsAdapter.SavedSongViewHolder>(SavedSongDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SavedSongViewHolder {
         val binding = ItemSavedSongBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,10 +28,10 @@ class SavedSongsAdapter(
 
     class SavedSongViewHolder(
         private val binding: ItemSavedSongBinding,
-        private val onDeleteClick: (Song) -> Unit  // 🔸 ViewHolder로 전달
+        private val onDeleteClick: (SongItem) -> Unit  // 🔸 ViewHolder로 전달
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(song: Song) {
+        fun bind(song: SongItem) {
             binding.songTitle.text = song.title
             binding.songArtist.text = song.artist
             binding.albumImage.setImageResource(song.albumResId)
@@ -40,18 +44,45 @@ class SavedSongsAdapter(
                 song.isChecked = isChecked
             }
 
+//            binding.moreButton.setOnClickListener {
+//                onDeleteClick(song)  // 🔸 삭제 콜백 호출
+//            }
             binding.moreButton.setOnClickListener {
-                onDeleteClick(song)  // 🔸 삭제 콜백 호출
+                // 1. Firebase에서 좋아요 취소
+                val context = binding.root.context
+                Thread {
+                    val songDB = SongDatabase.getInstance(context)
+                    val songDao = songDB?.songDao()
+                    val matchedSong = songDao?.getSongs()?.find {
+                        it.title == song.title && it.singer == song.artist
+                    }
+
+                    matchedSong?.let {
+                        it.isLike = false
+
+                        // Firebase에서 좋아요 취소
+                        LikeManager.saveLikeToFirebase(it.id, false)
+
+                        // RoomDB 업데이트
+                        songDao.update(it)
+                    }
+
+                    // 2. UI에서 제거
+                    (context as? FragmentActivity)?.runOnUiThread {
+                        onDeleteClick(song)
+                        Toast.makeText(context, "곡이 삭제되었습니다", Toast.LENGTH_SHORT).show()
+                    }
+                }.start()
             }
         }
     }
 
-    class SavedSongDiffCallback : DiffUtil.ItemCallback<Song>() {
-        override fun areItemsTheSame(oldItem: Song, newItem: Song): Boolean {
+    class SavedSongDiffCallback : DiffUtil.ItemCallback<SongItem>() {
+        override fun areItemsTheSame(oldItem: SongItem, newItem: SongItem): Boolean {
             return oldItem.title == newItem.title && oldItem.artist == newItem.artist
         }
 
-        override fun areContentsTheSame(oldItem: Song, newItem: Song): Boolean {
+        override fun areContentsTheSame(oldItem: SongItem, newItem: SongItem): Boolean {
             return oldItem == newItem
         }
     }
