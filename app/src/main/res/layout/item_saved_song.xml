@@ -56,8 +56,10 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
-        android:src="@drawable/btn_player_more"
+        android:src="@drawable/btn_editbar_delete"
+        android:background="#000000"
         android:contentDescription="더보기" />
+
 </LinearLayout>
 
 

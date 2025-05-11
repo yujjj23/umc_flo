@@ -46,7 +46,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/img_album_exp2"
+        android:src="@drawable/img_album_exp3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
