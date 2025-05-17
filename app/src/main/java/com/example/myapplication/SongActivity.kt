@@ -170,17 +170,6 @@ class SongActivity : AppCompatActivity() {
         songs.addAll(songDB.songDao().getSongs())
     }
 
-//    private fun initPlayList() {
-//        songs.clear()
-//        songs.addAll(
-//            listOf(
-//                Song(1, "Blue Dream", "Cheel", 120, 120, false, "bluedream_cheel", "img_album1", false, 1),
-//                Song(2, "Lofi Beat", "Milo", 150, 150, false, "lofi_milo", "img_album2", false, 1),
-//                Song(3, "Jazz Night", "Noir", 180, 180, false, "jazz_noir", "img_album3", false, 2)
-//            )
-//        )
-//    }
-
 
     private fun initSong() {
         val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)

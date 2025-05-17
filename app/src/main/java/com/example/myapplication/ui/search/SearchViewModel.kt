@@ -10,21 +10,6 @@ import com.example.myapplication.SongDatabase
 import com.example.myapplication.model.SongItem
 
 
-
-//class SearchViewModel(application: Application) : AndroidViewModel(application) {
-//
-//    private val songDao: SongDao = requireNotNull(SongDatabase.getInstance(application)).songDao()
-//
-//
-//    fun deleteAllLikedSongs() {
-//        Thread {
-//            songDao.deleteAllLikedSongs()
-//        }.start()
-//    }
-//}
-
-
-
 class SearchViewModel(application: Application) : AndroidViewModel(application) {
 
     private val songDao: SongDao = requireNotNull(SongDatabase.getInstance(application)).songDao()

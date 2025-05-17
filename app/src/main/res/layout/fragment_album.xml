@@ -55,6 +55,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp"/>
 
+    <!-- 가수명 -->
+    <TextView
+        android:id="@+id/tv_album_singer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가수명"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@id/iv_center_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
     <!-- 앨범 이미지 (화면 중앙) -->
     <ImageView
         android:id="@+id/iv_center_image"
