@@ -1,16 +1,21 @@
 package com.example.myapplication.ui.search;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.myapplication.LoginActivity;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.SavedSongsAdapter;
 import com.example.myapplication.SavedSongsFragment;
@@ -56,8 +61,16 @@ public class SearchFragment extends Fragment {
                 case 1:
                     tab.setText("음악 파일");
                     break;
+                case 2:
+                    tab.setText("저장앨범");
+                    break;
             }
         }).attach();
+
+        binding.loginButton.setOnClickListener(v -> {
+            Intent intent = new Intent(requireContext(), LoginActivity.class);
+            startActivity(intent);
+        });
 
         // 전체선택 텍스트 클릭 시 BottomSheetDialog 실행
         binding.selectAllText.setOnClickListener(v -> showSelectAllBottomSheet());
@@ -93,18 +106,7 @@ public class SearchFragment extends Fragment {
         bottomSheetDialog.show();
     }
 
-    // 저장한 곡 전체 삭제 처리
-//    private void handleDeleteAllLikedSongs() {
-//        // ViewModel을 통해 DB에서 전체 삭제 처리
-//        searchViewModel.deleteAllLikedSongs(); // ViewModel에 정의되어 있어야 함
-//
-//        // RecyclerView 갱신 (어댑터에서 리스트 비우기)
-//        // 예: likedSongsAdapter.clear();
-//
-//        bottomSheetDialog.dismiss();
-//
-//        Toast.makeText(getContext(), "저장한 곡을 모두 삭제했습니다", Toast.LENGTH_SHORT).show();
-//    }
+
 
     private void handleDeleteAllLikedSongs() {
         // ViewPager에서 SavedSongsFragment 찾아서 함수 호출
@@ -123,6 +125,45 @@ public class SearchFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        initViews();  // initViews 호출
+    }
+
+    private int getJwt() {
+        SharedPreferences spf = getActivity().getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE);
+        return spf.getInt("jwt", 0);
+    }
+
+    private void initViews() {
+        int jwt = getJwt();
+        if (jwt == 0) {
+            binding.loginButton.setText("로그인");
+            binding.loginButton.setOnClickListener(v -> {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            });
+        } else {
+            binding.loginButton.setText("로그아웃");
+            binding.loginButton.setOnClickListener(v -> {
+//                Intent intent = new Intent(getActivity(), MainActivity.class);
+//                startActivity(intent);
+                logout();  // 로그아웃 호출
+                startActivity(new Intent(getActivity(), MainActivity.class));
+            });
+        }
+    }
+
+    private void logout() {
+        SharedPreferences spf = getActivity().getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = spf.edit();
+        editor.remove("jwt");
+        editor.apply();
+    }
+
+
 }
 
 

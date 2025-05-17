@@ -23,17 +23,44 @@
         android:label="@string/title_검색"
         tools:layout="@layout/fragment_notifications" />
 
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_search"-->
+<!--        android:name="com.example.myapplication.ui.search.SearchFragment"-->
+<!--        android:label="@string/title_보관함"-->
+<!--        tools:layout="@layout/fragment_search" />-->
+
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.example.myapplication.ui.search.SearchFragment"
         android:label="@string/title_보관함"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search">
+
+        <action
+            android:id="@+id/action_navigation_search_to_albumFragment"
+            app:destination="@id/albumFragment" />
+    </fragment>
+
+
+
+
 
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.example.myapplication.AlbumFragment"
         android:label="fragment_album"
         tools:layout="@layout/fragment_album" />
+
+
+    <fragment
+        android:id="@+id/savedAlbumsFragment"
+        android:name="com.example.myapplication.SavedAlbumsFragment"
+        android:label="보관함"
+        tools:layout="@layout/fragment_saved_albums">
+
+        <action
+            android:id="@+id/action_savedAlbumsFragment_to_albumFragment"
+            app:destination="@id/albumFragment" />
+    </fragment>
 
 
     <action

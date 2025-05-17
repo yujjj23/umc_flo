@@ -1,6 +1,6 @@
 package com.example.myapplication.ui.home
 
-import AppDatabase
+//import AppDatabase
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -24,12 +24,14 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.myapplication.Album
 import com.example.myapplication.AlbumDao
 import com.example.myapplication.AlbumData
-import com.example.myapplication.DatabaseProvider
 import com.example.myapplication.SongDao
 import com.example.myapplication.SongDatabase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
 
@@ -41,9 +43,11 @@ class HomeFragment : Fragment() {
     private lateinit var panelAdapter: PanelAdapter
 
     private lateinit var albumDao: AlbumDao
-    private lateinit var albumDatabase: AppDatabase
+//    private lateinit var albumDatabase: AppDatabase
     lateinit var songDatabase: SongDatabase
     lateinit var songDao: SongDao
+
+//    private lateinit var albumDatabase: SongDatabase
 
     private lateinit var btnNextSong: AppCompatImageButton // "다음 곡" 버튼 선언
 
@@ -58,9 +62,11 @@ class HomeFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        albumDatabase = DatabaseProvider.getDatabase(requireContext())
-        albumDao = albumDatabase.albumDao()
-        songDatabase = SongDatabase.getInstance(requireContext())!!  // ✅ 이 줄 꼭 추가!
+//        albumDatabase = DatabaseProvider.getDatabase(requireContext())
+        songDatabase = SongDatabase.getInstance(requireContext())!!
+
+        albumDao = songDatabase.albumDao()
+//        songDatabase = SongDatabase.getInstance(requireContext())!!  // ✅ 이 줄 꼭 추가!
         songDao = songDatabase.songDao()
 
         val btnGoToAlbum = view.findViewById<AppCompatImageButton>(R.id.btn_go_to_album)
@@ -116,27 +122,34 @@ class HomeFragment : Fragment() {
         }
         handler.postDelayed(runnable, 5000)
 
-        btnGoToAlbum.setOnClickListener {
-            navigateToAlbum(btnGoToAlbum)
-        }
-
-        btnGoToAlbum2.setOnClickListener {
-            navigateToAlbum(btnGoToAlbum2)
-        }
+//        btnGoToAlbum.setOnClickListener {
+//            navigateToAlbum(btnGoToAlbum)
+//        }
+//
+//        btnGoToAlbum2.setOnClickListener {
+//            navigateToAlbum(btnGoToAlbum2)
+//        }
 
         loadAlbumData(view)
 
         return view
     }
 
+
     private fun loadAlbumData(view: View) {
         lifecycleScope.launch {
-            val albums = albumDao.getAllAlbums()
+            // 백그라운드 스레드에서 DB 호출
+            val albums = withContext(Dispatchers.IO) {
+                albumDao.getAllAlbums()
+            }
 
             if (albums.isNotEmpty()) {
                 val album1 = albums[0]
                 view.findViewById<AppCompatImageButton>(R.id.btn_go_to_album).apply {
                     setImageResource(resources.getIdentifier(album1.coverImg, "drawable", context?.packageName))
+                    setOnClickListener {
+                        navigateToAlbum(album1)
+                    }
                 }
                 view.findViewById<TextView>(R.id.text_title1).text = album1.title
                 view.findViewById<TextView>(R.id.text_artist1).text = album1.singer
@@ -146,6 +159,9 @@ class HomeFragment : Fragment() {
                 val album2 = albums[1]
                 view.findViewById<AppCompatImageButton>(R.id.btn_go_to_album2).apply {
                     setImageResource(resources.getIdentifier(album2.coverImg, "drawable", context?.packageName))
+                    setOnClickListener {
+                        navigateToAlbum(album2)
+                    }
                 }
                 view.findViewById<TextView>(R.id.text_title2).text = album2.title
                 view.findViewById<TextView>(R.id.text_artist2).text = album2.singer
@@ -153,38 +169,8 @@ class HomeFragment : Fragment() {
         }
     }
 
-    // ✅ 수정된 수록곡 첫 곡 재생 함수
-//    private fun playFirstSongFromAlbum(albumId: Int) {
-//        val context = requireContext()
-//        val songs = songDao.getSongsByAlbum(albumId)
-//
-//        if (songs.isNotEmpty()) {
-//            val firstSong = songs[0]
-//
-//            val resId = resources.getIdentifier("bluedream_cheel", "raw", context.packageName)
-//            Log.d("HomeFragment", "하드코딩한 resId 값: $resId")
-//
-//            if (resId == 0) {
-//                Toast.makeText(context, "음악 리소스를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
-//                return
-//            }
-//
-//            MusicPlayerManager.playNewSong(context, resId)
-//
-//            val activity = activity as? MainActivity ?: return
-//            val binding = activity.binding  // MainActivity의 바인딩 객체 사용
-//
-//            binding.tvSongTitle.text = firstSong.title
-//            binding.tvArtistName.text = firstSong.singer
-//            binding.miniBtnPlay.setImageResource(R.drawable.btn_miniplay_pause)
-//            binding.miniPlayer.visibility = View.VISIBLE
-//
-//            firstSong.isPlaying = true
-//            songDao.update(firstSong)
-//        } else {
-//            Toast.makeText(context, "해당 앨범의 수록곡이 없습니다.", Toast.LENGTH_SHORT).show()
-//        }
-//    }
+
+
 
 
     private fun loadSongsFromAlbum(albumId: Int) {
@@ -205,16 +191,24 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun navigateToAlbum(button: AppCompatImageButton) {
-        val imageResId = getImageResourceId(button)
-        val albumTitle = getAlbumTitle(imageResId)
+//    private fun navigateToAlbum(button: AppCompatImageButton) {
+//        val imageResId = getImageResourceId(button)
+//        val albumTitle = getAlbumTitle(imageResId)
+//
+//        val bundle = Bundle().apply {
+//            putString("ALBUM_TITLE", albumTitle)
+//            putInt("IMAGE_RES_ID", imageResId)
+//        }
+//        findNavController().navigate(R.id.action_homeFragment_to_albumFragment, bundle)
+//    }
 
+    private fun navigateToAlbum(album: Album) {
         val bundle = Bundle().apply {
-            putString("ALBUM_TITLE", albumTitle)
-            putInt("IMAGE_RES_ID", imageResId)
+            putParcelable("ALBUM_DATA", album)
         }
         findNavController().navigate(R.id.action_homeFragment_to_albumFragment, bundle)
     }
+
 
     private fun getImageResourceId(button: AppCompatImageButton): Int {
         return when (button.drawable.constantState) {
@@ -238,6 +232,11 @@ class HomeFragment : Fragment() {
         super.onPause()
         handler.removeCallbacks(runnable)
     }
+    override fun onResume() {
+        super.onResume()
+        loadAlbumData(requireView()) // 앨범 정보를 다시 로드하여 최신 좋아요 상태 반영
+    }
+
 }
 
 

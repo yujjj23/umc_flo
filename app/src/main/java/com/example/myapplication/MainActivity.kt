@@ -1,6 +1,6 @@
 package com.example.myapplication
 
-import AppDatabase
+//import AppDatabase
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -31,12 +31,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var miniSeekBar: SeekBar
     private lateinit var miniBtnPlay: ImageView
     private lateinit var songDB: SongDatabase
-    private lateinit var albumDB: AppDatabase
+//    private lateinit var albumDB: AppDatabase
     private lateinit var sharedPrefs: SharedPreferences
 
     private var song: Song = Song()
     private var gson: Gson = Gson()
 
+    private var album: Album = Album()
 //    private lateinit var songDao: SongDao
 private lateinit var songDao: SongDao
     private var currentSongIndex = 0
@@ -82,7 +83,9 @@ private var songs: List<Song> = emptyList()
         songDB = SongDatabase.getInstance(this)!! // 초기화 먼저
         songDao = SongDatabase.getInstance(this)!!.songDao()
 
-        val albumDatabase = DatabaseProvider.getDatabase(this)
+//        val albumDatabase = DatabaseProvider.getDatabase(this)
+        val albumDatabase = SongDatabase.getInstance(this)!!
+
         val albumDao = albumDatabase.albumDao()
 
         // "다음 곡" 버튼 리스너
@@ -246,7 +249,9 @@ private fun loadInitialSong() {
         super.onStart()
 
         // Album 삽입
-        val albumDatabase = DatabaseProvider.getDatabase(this)
+//        val albumDatabase = DatabaseProvider.getDatabase(this)
+        val albumDatabase = SongDatabase.getInstance(this)!!
+
         val albumDao = albumDatabase.albumDao()
 
         insertDummyAlbums(albumDao)  // 여기서 DB에 삽입
@@ -270,23 +275,30 @@ private fun loadInitialSong() {
     // 데이터 삽입 함수
     private fun insertDummyAlbums(albumDao: AlbumDao) {
         val album1 = Album(
-            id = 1,
+            id = 0,
             title = "Next Level",
             singer = "aespa",
-            coverImg = "img_album_exp3"
+            coverImg = "img_album_exp3",
+            isLike = false
         )
         val album2 = Album(
-            id = 2,
+            id = 1,
             title = "Butter",
             singer = "BTS",
-            coverImg = "img_album_exp4"
+            coverImg = "img_album_exp4",
+            isLike = false
         )
 
-        lifecycleScope.launch {
-            albumDao.insertAlbum(album1)  // suspend 함수 호출
-            albumDao.insertAlbum(album2)  // suspend 함수 호출
+        lifecycleScope.launch(Dispatchers.IO) {
+            albumDao.insert(album1)
+            albumDao.insert(album2)
         }
+
     }
+
+
+
+
 
     private fun insertDummySongs() {
         CoroutineScope(Dispatchers.IO).launch {

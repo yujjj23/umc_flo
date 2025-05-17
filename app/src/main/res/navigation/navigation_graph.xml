@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/savedAlbumsFragment">
+
+    <fragment
+        android:id="@+id/savedAlbumsFragment"
+        android:name="com.example.myapplication.SavedAlbumsFragment"
+        android:label="Saved Albums"
+        tools:layout="@layout/fragment_saved_albums">
+        <!-- SavedAlbumsFragment에서 AlbumFragment로 이동하는 액션 정의 -->
+        <action
+            android:id="@+id/action_savedAlbumsFragment_to_albumFragment"
+            app:destination="@id/albumFragment">
+            <!-- 앨범 정보를 전달하는 파라미터 정의 -->
+            <argument
+                android:name="ALBUM_TITLE"
+                app:argType="string" />
+            <argument
+                android:name="ALBUM_COVER_IMG"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/albumFragment"
+        android:name="com.example.myapplication.AlbumFragment"
+        android:label="Album"
+        tools:layout="@layout/fragment_album">
+        <!-- AlbumFragment에서 사용하는 인자들 정의 -->
+        <argument
+            android:name="ALBUM_TITLE"
+            app:argType="string" />
+        <argument
+            android:name="ALBUM_COVER_IMG"
+            app:argType="string" />
+    </fragment>
+
+
+
+</navigation>
