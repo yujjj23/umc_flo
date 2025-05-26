@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#808080</color>
     <color name="my_toast_blue">#2196F3</color> <!-- 예: 파랑 -->
+    <color name="flo">#3f3fff</color>
+    <color name="form_error">#F11818</color>
 </resources>
