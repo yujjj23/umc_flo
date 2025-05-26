@@ -13,7 +13,7 @@ class ChartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val textView = TextView(context)
-        textView.text = "\n차트>"
+        textView.text = "\n 차트>"
         textView.textSize = 20f
         return textView
     }

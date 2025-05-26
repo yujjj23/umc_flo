@@ -1,52 +1,11 @@
-//package com.example.myapplication.ui.dashboard
-//
-//import android.os.Bundle
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.view.ViewGroup
-//import android.widget.TextView
-//import androidx.fragment.app.Fragment
-//import androidx.lifecycle.ViewModelProvider
-//import com.example.myapplication.databinding.FragmentDashboardBinding
-//
-//class DashboardFragment : Fragment() {
-//
-//    private var _binding: FragmentDashboardBinding? = null
-//
-//    // This property is only valid between onCreateView and
-//    // onDestroyView.
-//    private val binding get() = _binding!!
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View {
-//        val dashboardViewModel =
-//            ViewModelProvider(this).get(DashboardViewModel::class.java)
-//
-//        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-//        val root: View = binding.root
-//
-//        val textView: TextView = binding.textDashboard
-//        dashboardViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
-//        return root
-//    }
-//
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        _binding = null
-//    }
-//}
-
 package com.example.myapplication.ui.dashboard
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.DashboardPagerAdapter
@@ -57,27 +16,62 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class DashboardFragment : Fragment() {
 
-    private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
+    private lateinit var tabTextViews: List<TextView>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
-        tabLayout = view.findViewById(R.id.tabLayout)
-        viewPager = view.findViewById(R.id.viewPager)
+        viewPager = view.findViewById(R.id.look_view_pager)
 
+        tabTextViews = listOf(
+            view.findViewById(R.id.look_chip_title_01_tv),
+            view.findViewById(R.id.look_chip_title_02_tv),
+            view.findViewById(R.id.look_chip_title_03_tv),
+            view.findViewById(R.id.look_chip_title_04_tv),
+            view.findViewById(R.id.look_chip_title_05_tv),
+            view.findViewById(R.id.look_chip_title_06_tv)
+        )
+
+        // ViewPager 연결
         val adapter = DashboardPagerAdapter(this)
         viewPager.adapter = adapter
 
-        // 탭 이름 설정
-        val tabTitles = listOf("차트", "영상", "장르", "상황", "분위기", "오디오")
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = tabTitles[position]
-        }.attach()
+        // 탭 클릭 시 ViewPager 이동
+        tabTextViews.forEachIndexed { index, textView ->
+            textView.setOnClickListener {
+                viewPager.currentItem = index
+            }
+        }
+
+        // ViewPager 스와이프 시 탭 UI 변경
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                updateTabStyles(position)
+            }
+        })
+
+        // 초기 탭 스타일 설정
+        updateTabStyles(0)
 
         return view
     }
+
+    private fun updateTabStyles(selectedPosition: Int) {
+        tabTextViews.forEachIndexed { index, textView ->
+            if (index == selectedPosition) {
+                textView.setTextColor(Color.WHITE)
+                textView.setBackgroundResource(R.drawable.fragment_look_chip_on_background)
+            } else {
+                textView.setTextColor(Color.parseColor("#7D7D7D"))
+                textView.setBackgroundResource(R.drawable.fragment_look_chip_off_background)
+            }
+        }
+    }
 }
+
+

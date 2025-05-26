@@ -1,82 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="24dp">
+    android:layout_height="match_parent">
 
-    <!-- 회원가입 제목 -->
     <TextView
-        android:id="@+id/signupTitle"
+        android:id="@+id/sign_up_sign_up_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="회원가입"
-        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- 아이디 (이메일) -->
     <EditText
         android:id="@+id/sign_up_id_et"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="아이디 (이메일)"
-        android:inputType="textEmailAddress"
-        app:layout_constraintTop_toBottomOf="@id/signupTitle"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="5dp"
+        android:background="@null"
+        android:hint="아이디(이메일)"
+        android:inputType="text"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/sign_up_at_sign_tv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/signUpDirectInputEt"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_sign_up_tv" />
 
-    <!-- 이메일 직접입력 -->
-    <EditText
-        android:id="@+id/signUpDirectInputEt"
+    <View
+        android:id="@+id/sign_up_id_underscore_view"
+        android:layout_width="0dp"
+        android:layout_height="1px"
+        android:layout_marginTop="15dp"
+        android:background="#a8a8a8"
+        app:layout_constraintEnd_toEndOf="@+id/sign_up_id_et"
+        app:layout_constraintStart_toStartOf="@+id/sign_up_id_et"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_id_et"/>
+
+    <TextView
+        android:id="@+id/sign_up_at_sign_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="@직접입력"
-        app:layout_constraintTop_toTopOf="@id/sign_up_id_et"
-        app:layout_constraintBottom_toBottomOf="@id/sign_up_id_et"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:text="\@"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/sign_up_id_et"
+        app:layout_constraintEnd_toEndOf="@+id/sign_up_sign_up_tv"
+        app:layout_constraintStart_toStartOf="@+id/sign_up_sign_up_tv"
+        app:layout_constraintTop_toTopOf="@+id/sign_up_id_et" />
 
-    <!-- 비밀번호 -->
+    <EditText
+        android:id="@+id/signUpDirectInputEt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="20dp"
+        android:background="@null"
+        android:hint="직접입력"
+        android:inputType="textWebEmailAddress"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/sign_up_id_et"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sign_up_at_sign_tv"
+        app:layout_constraintTop_toTopOf="@+id/sign_up_at_sign_tv" />
+
+    <View
+        android:id="@+id/sign_up_address_underscore_view"
+        android:layout_width="0dp"
+        android:layout_height="1px"
+        android:layout_marginTop="15dp"
+        android:background="#a8a8a8"
+        app:layout_constraintEnd_toEndOf="@+id/signUpDirectInputEt"
+        app:layout_constraintStart_toStartOf="@+id/signUpDirectInputEt"
+        app:layout_constraintTop_toBottomOf="@+id/signUpDirectInputEt"/>
+
+    <ImageView
+        android:id="@+id/sign_up_email_list_iv"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginEnd="5dp"
+        android:src="@drawable/nugu_btn_down"
+        app:layout_constraintBottom_toBottomOf="@+id/signUpDirectInputEt"
+        app:layout_constraintEnd_toEndOf="@+id/signUpDirectInputEt"
+        app:layout_constraintTop_toTopOf="@+id/signUpDirectInputEt" />
+
+    <TextView
+        android:id="@+id/sign_up_email_error_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/form_error"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_id_underscore_view"/>
+
+    <EditText
+        android:id="@+id/sign_up_name_et"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:background="@null"
+        android:hint="이름"
+        android:inputType="textPersonName"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_email_error_tv" />
+
+    <View
+        android:id="@+id/sign_up_name_underscore_view"
+        android:layout_width="150dp"
+        android:layout_height="1px"
+        android:layout_marginTop="15dp"
+        android:background="#a8a8a8"
+        app:layout_constraintStart_toStartOf="@+id/sign_up_password_et"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_name_et"/>
+
     <EditText
         android:id="@+id/sign_up_password_et"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@null"
         android:hint="비밀번호"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/sign_up_id_et"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_name_et" />
 
-    <!-- 비밀번호 확인 -->
+    <View
+        android:id="@+id/sign_up_password_underscore_view"
+        android:layout_width="0dp"
+        android:layout_height="1px"
+        android:layout_marginTop="15dp"
+        android:background="#a8a8a8"
+        app:layout_constraintEnd_toEndOf="@+id/sign_up_password_et"
+        app:layout_constraintStart_toStartOf="@+id/sign_up_password_et"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_password_et"/>
+
+    <ImageView
+        android:id="@+id/sign_up_hide_password_iv"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="5dp"
+        android:src="@drawable/btn_input_password"
+        app:layout_constraintBottom_toBottomOf="@+id/sign_up_password_et"
+        app:layout_constraintEnd_toEndOf="@+id/sign_up_password_et"
+        app:layout_constraintTop_toTopOf="@+id/sign_up_password_et" />
+
     <EditText
         android:id="@+id/sign_up_password_check_et"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@null"
         android:hint="비밀번호 확인"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/sign_up_password_et"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_password_underscore_view" />
 
-    <Button
-        android:id="@+id/sign_up_sign_up_btn"
-        android:text="회원가입"
-        android:textSize="24sp"
+    <View
+        android:id="@+id/sign_up_password_check_underscore_view"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/sign_up_password_check_et"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_height="1px"
+        android:layout_marginTop="15dp"
+        android:background="#a8a8a8"
+        app:layout_constraintEnd_toEndOf="@+id/sign_up_password_check_et"
+        app:layout_constraintStart_toStartOf="@+id/sign_up_password_check_et"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_password_check_et"/>
 
+    <ImageView
+        android:id="@+id/sign_up_hide_password_check_iv"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="5dp"
+        android:src="@drawable/btn_input_password"
+        app:layout_constraintBottom_toBottomOf="@+id/sign_up_password_check_et"
+        app:layout_constraintEnd_toEndOf="@+id/sign_up_password_check_et"
+        app:layout_constraintTop_toTopOf="@+id/sign_up_password_check_et" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/sign_up_sign_up_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/button_background_flo_color"
+        android:text="가입완료"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/sign_up_loading_pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:indeterminateTint="@color/flo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
