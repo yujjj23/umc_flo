@@ -2,12 +2,8 @@ package com.example.myapplication.ui.search
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.myapplication.SongDao
-import com.example.myapplication.SongDatabase
-import com.example.myapplication.model.SongItem
+import com.example.myapplication.ui.song.SongDao
+import com.example.myapplication.ui.song.SongDatabase
 
 
 class SearchViewModel(application: Application) : AndroidViewModel(application) {
